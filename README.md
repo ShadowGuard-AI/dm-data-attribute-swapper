@@ -12,7 +12,7 @@ Randomly swaps values between specified columns or attributes within a dataset. 
 ## Parameters
 - `-h`: Show help message and exit
 - `--output_file`: Path to the output file
-- `--log_level`: No description provided
+- `--log_level`: Set the logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
 
 ## License
 Copyright (c) ShadowStrikeHQ
