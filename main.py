@@ -1,6 +1,8 @@
 import argparse
 import logging
 import random
+import sys
+
 import pandas as pd
 import yaml
 import os
@@ -66,11 +68,18 @@ def swap_data(df, columns_to_swap):
             logging.error(f"Column(s) '{col1}' or '{col2}' not found in the DataFrame.")
             continue  # Skip to the next pair if a column is missing
 
-        # Create a temporary column to store shuffled values of col2
-        temp_col = f"temp_{col2}"  # Added f prefix for f-string
+        # The exchange is deliberately lopsided. col2 receives col1 in its
+        # original row order, while col1 receives a permuted copy of col2,
+        # so neither column keeps its old row pairing with the other. A
+        # plain per-row swap would preserve those pairings exactly.
+        # The staging name is lengthened until it cannot collide with a
+        # real column; overwriting and then dropping a user's own
+        # temp_<col2> column would silently delete their data.
+        temp_col = f"temp_{col2}"
+        while temp_col in df.columns:
+            temp_col = "_" + temp_col
         df[temp_col] = df[col2].sample(frac=1, random_state=random.randint(0, 1000)).reset_index(drop=True)
 
-        # Swap the values
         df[col2] = df[col1].copy()  # Copy values from col1 to col2
         df[col1] = df[temp_col].copy() # Copy values from temp to col1
 
@@ -105,7 +114,7 @@ def main():
 
         if not validate_config(config):
             logging.error("Invalid configuration file. Exiting.")
-            return
+            sys.exit(1)
 
         # Load data file
         file_extension = os.path.splitext(args.data_file)[1].lower()
@@ -115,7 +124,7 @@ def main():
             df = pd.read_excel(args.data_file)
         else:
             logging.error("Unsupported file format. Only CSV and Excel files are supported.")
-            return
+            sys.exit(1)
 
         logging.info(f"Loaded data from '{args.data_file}' with shape: {df.shape}")
 
@@ -126,13 +135,21 @@ def main():
         df.to_csv(args.output_file, index=False)
         logging.info(f"Masked data saved to '{args.output_file}'")
 
+    # Every failure path exits 1. These branches used to fall through to
+    # the completion log line below, so a missing file or a bad config
+    # reported success to any script driving this tool.
     except FileNotFoundError as e:
         logging.error(f"File not found: {e}")
+        sys.exit(1)
     except pd.errors.EmptyDataError:
         logging.error(f"The data file '{args.data_file}' is empty.")
+        sys.exit(1)
+    except SystemExit:
+        raise
     except Exception as e:
         logging.error(f"An error occurred: {e}")
         logging.exception("Detailed error information:")  # Include traceback
+        sys.exit(1)
 
     logging.info("dm-data-attribute-swapper completed.")
 
