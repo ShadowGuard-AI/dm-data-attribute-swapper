@@ -6,6 +6,7 @@ import sys
 import pandas as pd
 import yaml
 import os
+from pathlib import Path
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -17,7 +18,7 @@ def setup_argparse():
     parser = argparse.ArgumentParser(description="Randomly swaps values between specified columns/attributes in a dataset.")
     parser.add_argument("data_file", help="Path to the data file (e.g., CSV, Excel)")
     parser.add_argument("config_file", help="Path to the configuration file (YAML)")
-    parser.add_argument("--output_file", "-o", help="Path to the output file", default="masked_data.csv") #added output file argument
+    parser.add_argument("--output_file", "-o", help="Path to the output file. It must not resolve to the data file. A name ending in .xlsx or .xls is written as an Excel workbook, anything else as CSV.", default="masked_data.csv") #added output file argument
     parser.add_argument("--log_level", "-l", help="Set the logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)", default="INFO") #added log level
     return parser
 
@@ -45,6 +46,10 @@ def validate_config(config):
         logging.error("'columns_to_swap' must be a list.")
         return False
 
+    if not columns_to_swap:
+        logging.error("'columns_to_swap' must not be empty: a run with no pairs swaps nothing.")
+        return False
+
     for swap_pair in columns_to_swap:
         if not isinstance(swap_pair, list) or len(swap_pair) != 2:
             logging.error("Each element in 'columns_to_swap' must be a list of two column names.")
@@ -65,8 +70,9 @@ def swap_data(df, columns_to_swap):
     """
     for col1, col2 in columns_to_swap:
         if col1 not in df.columns or col2 not in df.columns:
-            logging.error(f"Column(s) '{col1}' or '{col2}' not found in the DataFrame.")
-            continue  # Skip to the next pair if a column is missing
+            # A pair naming a missing column must fail the run, not be
+            # skipped while the tool reports completion on unswapped data.
+            raise ValueError(f"Column(s) '{col1}' or '{col2}' not found in the DataFrame.")
 
         # The exchange is deliberately lopsided. col2 receives col1 in its
         # original row order, while col1 receives a permuted copy of col2,
@@ -107,6 +113,10 @@ def main():
 
     logging.info("Starting dm-data-attribute-swapper")
 
+    if Path(args.data_file).resolve() == Path(args.output_file).resolve():
+        logging.error("Error: Output file cannot be the same file as the data file.")
+        sys.exit(1)
+
     try:
         # Load configuration file
         with open(args.config_file, 'r') as f:
@@ -131,8 +141,24 @@ def main():
         # Swap data based on configuration
         df = swap_data(df, config["columns_to_swap"])
 
-        # Save the masked data to a new file
-        df.to_csv(args.output_file, index=False)
+        # Save the masked data to a new file. An Excel named output gets a
+        # real Excel workbook; anything else gets CSV. If no Excel engine
+        # is available for the named format, refuse instead of writing CSV
+        # bytes under an Excel name.
+        output_extension = os.path.splitext(args.output_file)[1].lower()
+        if output_extension in (".xlsx", ".xls"):
+            try:
+                df.to_excel(args.output_file, index=False)
+            except Exception as e:
+                if isinstance(e, ImportError) or "No engine" in str(e):
+                    logging.error(
+                        f"No Excel engine is available to write '{args.output_file}'. "
+                        "Refusing to write CSV data under an Excel file name."
+                    )
+                    sys.exit(1)
+                raise
+        else:
+            df.to_csv(args.output_file, index=False)
         logging.info(f"Masked data saved to '{args.output_file}'")
 
     # Every failure path exits 1. These branches used to fall through to
