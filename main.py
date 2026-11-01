@@ -68,6 +68,10 @@ def swap_data(df, columns_to_swap):
     Returns:
         pd.DataFrame: The DataFrame with swapped data.
     """
+    # Pairs run in config order against the same frame, so a column
+    # named in two pairs is swapped twice, the second time on values
+    # the first swap already moved. The result depends on the order
+    # the pairs are written in the config, not just on the set of them.
     for col1, col2 in columns_to_swap:
         if col1 not in df.columns or col2 not in df.columns:
             # A pair naming a missing column must fail the run, not be
@@ -84,6 +88,12 @@ def swap_data(df, columns_to_swap):
         temp_col = f"temp_{col2}"
         while temp_col in df.columns:
             temp_col = "_" + temp_col
+        # The permutation seed is itself drawn at random from 0 to
+        # 1000, so there are only 1001 shuffles this can ever pick and
+        # no way to ask for one of them again. The reset_index makes
+        # the sampled values line up by position against the frame;
+        # without it the assignment would align on index labels and
+        # undo the shuffle it just made.
         df[temp_col] = df[col2].sample(frac=1, random_state=random.randint(0, 1000)).reset_index(drop=True)
 
         df[col2] = df[col1].copy()  # Copy values from col1 to col2
