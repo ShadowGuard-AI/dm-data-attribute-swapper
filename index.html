@@ -1,166 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dm Data Attribute Swapper: what it is, how it runs, where it stops</title>
-<meta name="description" content="Dm Data Attribute Swapper is one of my projects. The README in the repo is short, so this page sticks to what the files themselves show.">
-<style>
-:root {
-  --bg: #1a0c0c; --panel: #2a1412; --ink: #f0e6d6;
-  --mut: #381b18;
-  --acc: #c9a24b; --acc2: #94b2c4;
-  --line: #2a1412;
-}
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink);
-  font-family: Verdana, Geneva, sans-serif; line-height: 1.55; }
-code, pre, .mono { font-family: 'Lucida Console', monospace; }
-a { color: var(--acc2); }
-.hero { padding: 3rem 6vw 1rem; }
-.hero img.banner { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; }
-.logo { width: 92px; height: 92px; border-radius: 18px;
-  border: 1px solid var(--line); }
-h1 { font-size: 2.4rem; margin: 0.4em 0 0.1em; }
-h2 { border-bottom: 2px solid var(--acc); padding-bottom: 0.2em;
-  margin-top: 2em; }
-.lede { font-size: 1.15rem; max-width: 62ch; }
-main { padding: 0 6vw 3rem; max-width: 1180px; margin: 0 auto; }
-.grid { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-.card { background: var(--panel); border: 1px solid var(--line);
-  border-radius: 12px; padding: 1rem 1.2rem; }
-.card.pop { animation: rise 0.7s ease both; }
-@keyframes rise { from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: none; } }
-pre.code { background: #101014; color: #e8e6df; padding: 1rem 1.2rem;
-  border-radius: 12px; overflow-x: auto; font-size: 0.86rem;
-  border-left: 5px solid var(--acc); }
-table { border-collapse: collapse; width: 100%; }
-td, th { border-bottom: 1px solid var(--line); padding: 0.45rem 0.6rem;
-  text-align: left; }
-.shots { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.shots img { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; background: #f4f1e8; }
-footer { padding: 2rem 6vw; border-top: 1px solid var(--line);
-  color: var(--mut); }
-.rail { display: flex; gap: 1.2rem; align-items: flex-start; }
-.rail nav { position: sticky; top: 1rem; min-width: 180px; }
-@media (max-width: 760px) { .rail { flex-direction: column; }
-  .rail nav { position: static; } }
-@media (prefers-reduced-motion: reduce) {
-  .card.pop { animation: none; } * { scroll-behavior: auto; } }
-</style>
-</head>
-<body class="layout-grid">
-<!-- This page exists for dm-data-attribute-swapper alone: the layout (console-grid),
-     the colors, and the type were picked for this project, not
-     shared with the other project pages. The code block below is
-     copied from the file it names, line for line. If it looks
-     plain, that is because the project is plain, and I would
-     rather the page match the project than dress it up. The one
-     thing I will not do here is oversell: what this project does
-     not do is stated on the page, not hidden from it. -->
-<header class="hero">
-  <img class="logo" src="assets/logo.png" alt="Dm Data Attribute Swapper logo">
-  <img class="banner" src="assets/banner.png" alt="">
-  <h1>Dm Data Attribute Swapper</h1>
-  <p class="mono"><a href="https://github.com/ShadowGuard-AI/dm-data-attribute-swapper">github.com/ShadowGuard-AI/dm-data-attribute-swapper</a></p>
-</header>
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><title>dm-data-attribute-swapper: The Bookmobile's Mountain Circuit</title>
+<style>@font-face{font-family:Disp;src:url("fonts/Buda.ttf")}@font-face{font-family:Text;src:url("fonts/Barlow.ttf")}
+body{background:#f2ecd9;font-family:Text,sans-serif;color:#1c1a17;margin:0}main{max-width:920px;margin:0 auto;padding:28px 28px 28px 48px;border-left:3px solid #967648;position:relative}
+h1,h2,h3{font-family:Disp,serif;color:#2b4c7e}section{background:#e8dcc0;padding:18px 22px;margin:16px 0;border-top:3px solid #b08d2e;position:relative}
+section::before{content:"";position:absolute;left:-58px;top:22px;width:14px;height:14px;border-radius:50%;background:#b08d2e;border:2px solid #2b4c7e}
+img{max-width:100%}button{background:#e8dcc0;color:#2b4c7e;border:2px solid #2b4c7e;padding:12px 20px;margin:4px;font-family:Disp,serif;box-shadow:inset 0 -6px 0 #c9b88e}
+button:focus{outline:3px double #b08d2e}.label{display:inline-block;background:#e8dcc0;border:1px solid #2b4c7e;padding:2px 8px;font-size:13px}
+pre{white-space:pre-wrap;font-family:Text,sans-serif;background:#efe8d2;padding:14px}code{font-family:Text,sans-serif}</style></head><body><main>
+<img src="intro-banner.png" alt="Introduction banner: creek water, the dripping step and the open door, no name anywhere">
+<h1>dm-data-attribute-swapper: The Bookmobile's Mountain Circuit</h1>
+<p>dm-data-attribute-swapper: The Bookmobile's Mountain Circuit names itself in that form throughout this page. The page is laid out as a circuit of stops, one stop per plate, joined by a thin route line down the left margin. Brass marks each stop on the route line. String appears only on parcel and pouch details in the hero still.</p>
+<img src="logo.png" alt="Logo: the dropped bookmobile step with its brass hinge and a parcel tied to the rail"><img src="banner.png" alt="Wordmark banner: the van at the creek crossing and the route board carrying the name">
+<img src="scene.svg" alt="Animated scene in three bands">
+<div><button type="button">Rearrange the Named Pairs</button><button type="button">Load the Pairing List</button></div>
+<p><span class="label">Output File, Defaults to masked_data.csv</span></p>
+<h3>One Side Moves Straight, One Side Is Shuffled</h3><h3>Pair Order Changes the Result</h3><h3>No Run Comes Back Exactly</h3>
+<section><h2>Stop one: the job</h2><p>This program breaks the pairing between columns. Given a data file and a separate configuration file naming pairs of columns, it rearranges values so that a row no longer holds the combination it started with. Correlations between the named attributes are disrupted because the values stop travelling together.</p></section>
+<section><h2>Stop two: the exchange, honestly</h2><p>For each named pair, the second column receives the first column values in their original row order. The first column receives the second column values shuffled into a new order. So one side of the pair moves straight across, and the other side comes across scrambled. A plain row by row trade would keep every pairing intact, and this program pointedly does not do that.</p></section>
+<section><h2>Stop three: the true working call</h2><p><code>python3 main.py &lt;data_file&gt; &lt;config_file&gt; [--output_file &lt;output_file&gt;] [--log_level &lt;level&gt;]</code></p><p>The call is python3 main.py, then the data file path, then the configuration file path. Two optional flags follow, for output path and for log level. Placeholders stand in for every path. No real data file, no real configuration, and no actual column name from anyone's dataset appears anywhere on this site.</p></section>
+<section><h2>Stop four: install, corrected</h2><p><code>git clone https://github.com/ShadowGuard-AI/dm-data-attribute-swapper</code></p><p>The clone line above reads git clone https://github.com/ShadowGuard-AI/dm-data-attribute-swapper, organisation hyphenated and correct. A note beneath records that the README names a different organisation in that line, and that this site has not copied the error.</p></section>
+<section><h2>Stop five: the controls in parser order</h2><p>Data file, positional, CSV or Excel. Configuration file, positional, YAML. Output file, optional, with its short flag -o, defaulting to a CSV file named masked_data.csv in the working directory when the flag is absent. Log level, optional, with its short flag -l, default INFO, accepting the five standard level names: DEBUG, INFO, WARNING, ERROR, CRITICAL.</p></section>
+<section><h2>Stop six: what a valid configuration must look like</h2><p>The configuration must be a mapping. It must carry the key columns_to_swap. That value must be a non empty list. Each entry must be a list of exactly two column names. The shape, with placeholder names only:</p><pre>columns_to_swap:
+  - [first_placeholder_column, second_placeholder_column]</pre><p>No columns from a real dataset are shown.</p></section>
+<section><h2>Stop seven: sequence, repetition, and the limit on calling a run back</h2><p>Pairs are applied in the order the configuration lists them, against the same table. A column named in two pairs is therefore rearranged twice, the second time working on values the first arrangement already moved. The outcome depends on the ordering of the pairs, not only on which pairs are present. Beside this, at the same size, the reproducibility limit: the shuffle inside each pair is driven by a fresh random choice drawn from a small fixed pool of possibilities, a random integer between 0 and 1000 inclusive, so only 1001 distinct shuffles can ever be selected for a pair. There is no seed flag, and no run can be called back exactly.</p></section>
+<section><h2>Stop eight: the file edges</h2><p>Input is accepted as CSV, as .xlsx, or as .xls, and any other ending is refused at exit 1. An output name ending in .xlsx or .xls is written as a genuine Excel workbook when an engine for that work is available, and refused at exit 1 when none is. Any other output name is written as CSV. An output path resolving to the data file itself is refused at exit 1 before anything is loaded or written. The requirements file names pandas and PyYAML only, with no Excel engine of any kind, so on a machine built strictly from that file, reading an Excel input and writing an Excel output both fail for want of an engine.</p></section>
+<section><h2>Stop nine: refusal and failure, plainly</h2><p>A pair naming a column the data does not have ends the run at exit 1 with no output written. An empty columns_to_swap list is rejected as an invalid configuration, exit 1, no output. A malformed configuration, a missing file, and an empty data file each end the run at exit 1. An unrecognised log level does not end the run: the program notes the problem and carries on at INFO.</p></section>
+<section><h2>Final stop: licence</h2><p>Copyright (c) ShadowGuard-AI</p><p>The line above is the README licence line with its organisation corrected to the hyphenated form, and the change is labelled here as a site correction. Alongside it, a separate fact. The repository LICENSE file holds the MIT License. Its holder line gives the pen name in full, followed by a parenthetical given name carrying a single initial, followed by the account handle. That is recorded as fact. The holder line is not reproduced, and the initial is not expanded.</p></section>
+<section><h2>The preserved README record</h2><pre>![Banner](banner.png)
 
-<main>
-  <section class="rail">
-    <nav aria-label="on this page">
-      <p class="mono"><a href="#run">Run it</a><br>
-      <a href="#files">The files</a><br>
-      <a href="#sheets">The sheets</a><br>
-      <a href="https://github.com/ShadowGuard-AI/dm-data-attribute-swapper">The repo</a></p>
-    </nav>
-    <div>
-      <p class="lede">Dm Data Attribute Swapper is one of my projects. The README in the repo is short, so this page sticks to what the files themselves show.</p>
-      <div class="grid">
-        <div class="card pop"><h3>What it is</h3>
-          <p>Dm Data Attribute Swapper: 5 files, 178 counted
-          lines across Python 158, Markdown 18, Text 2. One job, done in the
-          open, in files you can read.</p></div>
-        <div class="card pop"><h3>The biggest piece</h3>
-          <p><code>main.py</code> carries the most
-          lines. If the project grows, that file is where the growth
-          lands first, for better or worse.</p></div>
-        <div class="card pop"><h3>The honest gap</h3>
-          <p>No test files yet. That is the honest gap, and the roadmap in the visuals folder says what the first one should cover.</p></div>
-      </div>
-      <section id="run">
-        <h2>Run it</h2>
-        <p>The repo README has the exact commands for this one. The
-        shape is the shape for most of my projects: clone it, read the
-        top file first so you know what will happen, then run it on
-        something you do not mind breaking.</p>
-        <p class="mono">$ git clone https://github.com/ShadowGuard-AI/dm-data-attribute-swapper.git<br>$ cd dm-data-attribute-swapper</p>
-      </section>
-      
-  <section aria-label="real code">
-    <h2>The code, as it sits in the repo</h2>
-    <p>From <code>main.py</code>, line 11 on. I did
-    not tidy it for the page. What you see is what the file has.</p>
-    <pre class="code"><code>logging.basicConfig(level=logging.INFO, format=&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;)
+# dm-data-attribute-swapper
+Randomly swaps values between specified columns or attributes within a dataset. The tool takes a configuration file specifying the columns to swap, and a data source file. This is useful for disrupting correlations between attributes. - Focused on Tools designed to generate or mask sensitive data with realistic-looking but meaningless values
 
-def setup_argparse():
-    &quot;&quot;&quot;
-    Sets up the argument parser for the command-line interface.
-    &quot;&quot;&quot;
-    parser = argparse.ArgumentParser(description=&quot;Randomly swaps values between specified columns/attributes in a dataset.&quot;)
-    parser.add_argument(&quot;data_file&quot;, help=&quot;Path to the data file (e.g., CSV, Excel)&quot;)
-    parser.add_argument(&quot;config_file&quot;, help=&quot;Path to the configuration file (YAML)&quot;)
-    parser.add_argument(&quot;--output_file&quot;, &quot;-o&quot;, help=&quot;Path to the output file&quot;, default=&quot;masked_data.csv&quot;) #added output file argument
-    parser.add_argument(&quot;--log_level&quot;, &quot;-l&quot;, help=&quot;Set the logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)&quot;, default=&quot;INFO&quot;) #added log level
-    return parser
+## Install
+`git clone https://github.com/ShadowStrikeHQ/dm-data-attribute-swapper`
 
-def validate_config(config):
-    &quot;&quot;&quot;
-    Validates the configuration file.
+## Usage
+`./dm-data-attribute-swapper [params]`
 
-    Args:
-        config (dict): The configuration dictionary.
+## Parameters
+- `-h`: Show help message and exit
+- `data_file`: Path to the data file (CSV or Excel)
+- `config_file`: Path to the YAML configuration file naming the column pairs in `columns_to_swap`
+- `--output_file`: Path to the output file. It must not be the data file: if the output path resolves to the data file, the run refuses and exits 1 before any write. A name ending in .xlsx or .xls is written as a real Excel workbook when an engine for that format is available, and the run refuses at exit 1 when none is available, rather than writing CSV bytes under an Excel name. Any other name is written as CSV.
+- `--log_level`: Set the logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
 
-    Returns:
-        bool: True if the configuration is valid, False otherwise.</code></pre>
-  </section>
-      <section id="files">
-        <h2>The files that matter</h2>
-        <table><tr><th>File</th><th>Lines</th></tr>
-        <tr><td><code>main.py</code></td><td>158</td></tr>
-        <tr><td><code>README.md</code></td><td>18</td></tr>
-        <tr><td><code>requirements.txt</code></td><td>2</td></tr>
-        <tr><td><code>banner.png</code></td><td>0</td></tr>
-        <tr><td><code>logo.png</code></td><td>0</td></tr>
-        </table>
-        <p>Names doing the work: <span class="mono">setup_argparse, validate_config, swap_data, main</span>.</p>
-      </section>
-      <section id="sheets">
-        <h2>Drawn by hand</h2>
-        <p>I sketch my projects on notebook paper so I have to
-        understand them well enough to draw them. The full set,
-        with the counts and how they were counted, is the
-        <a href="https://github.com/ShadowGuard-AI/dm-data-attribute-swapper/tree/main/dm-data-attribute-swapper-Visuals">dm-data-attribute-swapper-Visuals</a>
-        folder in the repo. Nothing is drawn over the binder holes.
-        That is a rule, not a style.</p>
-        <div class="shots">
-          <img src="assets/architecture.png" alt="Hand drawn architecture sheet for Dm Data Attribute Swapper">
-          <img src="assets/flowchart.png" alt="Hand drawn flowchart sheet for Dm Data Attribute Swapper">
-          <img src="assets/product-map.png" alt="Hand drawn product map sheet for Dm Data Attribute Swapper">
-        </div>
-      </section>
-    </div>
-  </section>
-</main>
-<footer>
-  <p>Dm Data Attribute Swapper is one of my projects. This page was written
-  from the repo itself on 2026-10-30: the counts are the
-  repo's counts, the code is the repo's code, and the gaps are the
-  repo's gaps.</p>
-</footer>
-</body>
-</html>
+## Failure rules
+- If any configured pair names a column that is not in the data, the run exits 1 and writes no output.
+- An empty `columns_to_swap` list is rejected as an invalid configuration: the run exits 1 and writes no output.
+
+## License
+Copyright (c) ShadowStrikeHQ</pre></section>
+</main></body></html>
