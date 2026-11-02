@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" role="img" aria-label="The creek crossing in three bands: grass bending and creek water running in the far band, the van rocking slightly with its door swinging and book spines shifting in the middle band, and drips falling from the fixed step while the parcel string trembles in the near band">
+<rect width="900" height="300" fill="#7a8e70"/>
+<path d="M0 0 H900 V70 C650 92 380 58 0 84 Z" fill="#8a9e84"/>
+<g stroke="#607c52" stroke-width="3" stroke-linecap="round">
+<g><line x1="80" y1="96" x2="88" y2="66"/><animateTransform attributeName="transform" type="rotate" values="0 84 96; 9 84 96; 0 84 96" dur="3.2s" repeatCount="indefinite"/></g>
+<g><line x1="220" y1="100" x2="228" y2="70"/><animateTransform attributeName="transform" type="rotate" values="0 224 100; 11 224 100; 0 224 100" dur="2.7s" repeatCount="indefinite"/></g>
+<g><line x1="700" y1="94" x2="708" y2="64"/><animateTransform attributeName="transform" type="rotate" values="0 704 94; 8 704 94; 0 704 94" dur="3.6s" repeatCount="indefinite"/></g>
+<g><line x1="820" y1="98" x2="828" y2="68"/><animateTransform attributeName="transform" type="rotate" values="0 824 98; 10 824 98; 0 824 98" dur="3s" repeatCount="indefinite"/></g></g>
+<g fill="#eaf2f4"><ellipse cx="60" cy="128" rx="16" ry="3"/><ellipse cx="330" cy="138" rx="20" ry="3"/><ellipse cx="640" cy="130" rx="16" ry="3"/><ellipse cx="840" cy="140" rx="20" ry="3"/>
+<animateTransform attributeName="transform" type="translate" values="0 0; 52 0; 0 0" dur="9s" repeatCount="indefinite"/></g>
+<rect x="0" y="112" width="900" height="52" fill="#608094"/>
+<g>
+<animateTransform attributeName="transform" type="rotate" values="0 450 200; 0.7 450 200; 0 450 200; -0.5 450 200; 0 450 200" dur="11s" repeatCount="indefinite"/>
+<rect x="310" y="142" width="280" height="86" fill="#2b4c7e"/>
+<rect x="330" y="156" width="140" height="62" fill="#161a20"/>
+<g><rect x="340" y="168" width="16" height="50" fill="#785038"/><rect x="362" y="176" width="16" height="42" fill="#3e546e"/><rect x="384" y="166" width="16" height="52" fill="#546c48"/><rect x="406" y="174" width="16" height="44" fill="#8c5440"/>
+<animateTransform attributeName="transform" type="translate" values="0 0; 7 0; 0 0; -5 0; 0 0" dur="13s" repeatCount="indefinite"/></g>
+<g fill="#e8dcc0"><rect x="343" y="174" width="10" height="12"/><rect x="365" y="182" width="10" height="12"/><rect x="387" y="172" width="10" height="12"/><rect x="409" y="180" width="10" height="12"/></g>
+<g><rect x="486" y="156" width="62" height="62" fill="#34588c"/><animateTransform attributeName="transform" type="rotate" values="0 486 218; -5 486 218; 0 486 218" dur="12s" repeatCount="indefinite"/></g>
+<circle cx="356" cy="232" r="20" fill="#1e2228"/><circle cx="356" cy="232" r="8" fill="#b08d2e"/>
+<circle cx="544" cy="232" r="20" fill="#1e2228"/><circle cx="544" cy="232" r="8" fill="#b08d2e"/>
+<rect x="392" y="228" width="118" height="10" fill="#c9b88e"/>
+<rect x="392" y="238" width="118" height="4" fill="#b08d2e"/></g>
+<rect x="540" y="196" width="44" height="34" fill="#b2986c"/>
+<g stroke="#967648" stroke-width="2"><line x1="562" y1="196" x2="562" y2="230"/><line x1="540" y1="212" x2="584" y2="212"/>
+<animateTransform attributeName="transform" type="rotate" values="0 562 196; 2 562 196; 0 562 196; -2 562 196; 0 562 196" dur="2.4s" repeatCount="indefinite"/></g>
+<g fill="#c8e2ee"><circle cx="410" cy="244" r="3"><animate attributeName="cy" values="244; 282" dur="2.9s" repeatCount="indefinite"/></circle><circle cx="452" cy="244" r="3"><animate attributeName="cy" values="244; 286" dur="4.3s" repeatCount="indefinite"/></circle><circle cx="494" cy="244" r="3"><animate attributeName="cy" values="244; 280" dur="3.7s" repeatCount="indefinite"/></circle></g>
+<rect x="0" y="252" width="900" height="48" fill="#608094"/>
+<g fill="#e8dcc0"><ellipse cx="120" cy="276" rx="22" ry="6"/><ellipse cx="330" cy="286" rx="26" ry="7"/><ellipse cx="600" cy="272" rx="22" ry="6"/><ellipse cx="800" cy="284" rx="26" ry="7"/></g>
+</svg>
