@@ -18,12 +18,12 @@ Randomly swaps values between specified columns or attributes within a dataset. 
 ![Major separator](sep-heavy.svg)
 
 ## Install
-`git clone https://github.com/ShadowStrikeHQ/dm-data-attribute-swapper`
+`git clone https://github.com/ShadowGuard-AI/dm-data-attribute-swapper`
 
 ![Minor separator](sep-light.svg)
 
 ## Usage
-`./dm-data-attribute-swapper [params]`
+`python3 main.py data_file config_file [options]`
 
 > Bookplate: the exchange is uneven by design. One side moves straight across in its original row order, and the other side arrives shuffled, so no row keeps the pairing it started with.
 
@@ -51,7 +51,7 @@ Randomly swaps values between specified columns or attributes within a dataset. 
 ![Minor separator](sep-light.svg)
 
 ## License
-Copyright (c) ShadowStrikeHQ
+This project is released under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ![Major separator](sep-heavy.svg)
 
